@@ -3,16 +3,15 @@ package org.bridgelabz;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.bridgelabz.CensusAnalyzerCustomException.ExceptionType.CENSUS_FILE_PROBLEM;
-import static org.bridgelabz.CensusAnalyzerCustomException.ExceptionType.CENSUS_INCORRECT_FILE_FORMAT;
-import static org.bridgelabz.StateCodeCustomException.ExceptionType.STATE_CODE_FILE_PROBLEM;
-import static org.bridgelabz.StateCodeCustomException.ExceptionType.STATE_CODE_INCORRECT_FILE_FORMAT;
+import static org.bridgelabz.CensusAnalyzerCustomException.ExceptionType.*;
+import static org.bridgelabz.StateCodeCustomException.ExceptionType.*;
 
 public class StateCodeTestFile {
 
     private static final String INDIAN_STATE_CODE_FILE = "C:\\Users\\asaha\\Desktop\\Java_Fellowship_242\\Indian_States_Census_Analyser_Problem_ALL\\src\\test\\resources\\StateCode.csv";
     private static final String WRONG_STATE_CODE_FILE = "Census.csv";
     private static final String INCORRECT_STATE_CODE_FILE_FORMAT = "C:\\Users\\asaha\\Desktop\\Java_Fellowship_242\\Indian_States_Census_Analyser_Problem_ALL\\src\\test\\resources\\StateCode.txt";
+    private static final String STATE_CODE_WRONG_DELIMITE_FILE = "C:\\Users\\asaha\\Desktop\\Java_Fellowship_242\\Indian_States_Census_Analyser_Problem_ALL\\src\\test\\resources\\StateCodeWrongDelimiter.csv";
 
     //TC 2.1
     @Test
@@ -46,6 +45,17 @@ public class StateCodeTestFile {
         });
 
         Assertions.assertEquals(STATE_CODE_INCORRECT_FILE_FORMAT, exceptionRule.type);
+    }
+
+    //TC 2.4
+    @Test
+    public void givenIndianStateCodeData_WhenCustomDelimiter_ShouldThrowException() {
+
+        StateCode stateCode = new StateCode();
+        StateCodeCustomException exceptionRule = Assertions.assertThrows(StateCodeCustomException.class,()->{
+            stateCode.loadIndianStateCode(STATE_CODE_WRONG_DELIMITE_FILE);
+        });
+        Assertions.assertEquals(STATE_CODE_WRONG_DELIMITER_OR_WRONG_HEADER, exceptionRule.type);
     }
 
 
