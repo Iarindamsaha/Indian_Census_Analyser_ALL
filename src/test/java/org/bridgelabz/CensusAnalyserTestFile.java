@@ -19,6 +19,7 @@ public class CensusAnalyserTestFile {
 
     }
 
+    //TC 1.2
     @Test
     public void givenIndiaCensusData_WithWrongFile_ShouldThrowExceptionSadTest() {
         CensusAnalyser censusAnalyser = new CensusAnalyser();
