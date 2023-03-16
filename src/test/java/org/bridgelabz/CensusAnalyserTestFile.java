@@ -63,4 +63,5 @@ public class CensusAnalyserTestFile {
         Assertions.assertEquals(CENSUS_WRONG_DELIMITER_OR_WRONG_HEADER, exceptionRule.type);
     }
 
+
 }

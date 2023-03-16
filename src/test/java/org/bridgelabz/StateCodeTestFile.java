@@ -12,6 +12,7 @@ public class StateCodeTestFile {
     private static final String WRONG_STATE_CODE_FILE = "Census.csv";
     private static final String INCORRECT_STATE_CODE_FILE_FORMAT = "C:\\Users\\asaha\\Desktop\\Java_Fellowship_242\\Indian_States_Census_Analyser_Problem_ALL\\src\\test\\resources\\StateCode.txt";
     private static final String STATE_CODE_WRONG_DELIMITE_FILE = "C:\\Users\\asaha\\Desktop\\Java_Fellowship_242\\Indian_States_Census_Analyser_Problem_ALL\\src\\test\\resources\\StateCodeWrongDelimiter.csv";
+    private static final String STATE_CODE_CSV_WRONG_HEADER = "C:\\Users\\asaha\\Desktop\\Java_Fellowship_242\\Indian_States_Census_Analyser_Problem_ALL\\src\\test\\resources\\StateCodeWrongHeader.csv";
 
     //TC 2.1
     @Test
@@ -54,6 +55,17 @@ public class StateCodeTestFile {
         StateCode stateCode = new StateCode();
         StateCodeCustomException exceptionRule = Assertions.assertThrows(StateCodeCustomException.class,()->{
             stateCode.loadIndianStateCode(STATE_CODE_WRONG_DELIMITE_FILE);
+        });
+        Assertions.assertEquals(STATE_CODE_WRONG_DELIMITER_OR_WRONG_HEADER, exceptionRule.type);
+    }
+
+    //TC2.5
+    @Test
+    public void givenIndianCensusCSVFile_WhenIncorrectHeader_ShouldThrowExceptionSadTest() {
+
+        StateCode stateCode = new StateCode();
+        StateCodeCustomException exceptionRule = Assertions.assertThrows(StateCodeCustomException.class,()->{
+            stateCode.loadIndianStateCode(STATE_CODE_CSV_WRONG_HEADER);
         });
         Assertions.assertEquals(STATE_CODE_WRONG_DELIMITER_OR_WRONG_HEADER, exceptionRule.type);
     }
