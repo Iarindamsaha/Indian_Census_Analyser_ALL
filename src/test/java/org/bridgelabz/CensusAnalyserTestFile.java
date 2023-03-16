@@ -4,11 +4,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.bridgelabz.CensusAnalyzerCustomException.ExceptionType.CENSUS_FILE_PROBLEM;
+import static org.bridgelabz.CensusAnalyzerCustomException.ExceptionType.CENSUS_INCORRECT_FILE_FORMAT;
 
 public class CensusAnalyserTestFile {
 
-    private static final String WRONG_CSV_FILE_PATH = "State.csv";
+    private static final String INCORRECT_FILE_FORMAT = "C:\\Users\\asaha\\Desktop\\Java_Fellowship_242\\Indian_States_Census_Analyser_Problem_ALL\\src\\main\\resources\\State.txt";
+    private  final String WRONG_CSV_FILE_PATH = "State.csv";
     private String INDIAN_CENSUS_CSV_FILE_PATH = "C:\\Users\\asaha\\Desktop\\Java_Fellowship_242\\Indian_States_Census_Analyser_Problem_ALL\\src\\main\\resources\\StateCensusData.csv";
+
 
     //TC 1.1
     @Test
@@ -28,4 +31,15 @@ public class CensusAnalyserTestFile {
         });
         Assertions.assertEquals(CENSUS_FILE_PROBLEM, exceptionRule.type);
     }
+
+    //TC 1.3
+    @Test
+    public void givenIndiaCensusData_WithWrongFileFormat_ShouldThrowExceptionSadTest() {
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        CensusAnalyzerCustomException exceptionRule = Assertions.assertThrows(CensusAnalyzerCustomException.class,()->{
+            censusAnalyser.loadIndiaCensusData(INCORRECT_FILE_FORMAT);
+        });
+        Assertions.assertEquals(CENSUS_INCORRECT_FILE_FORMAT, exceptionRule.type);
+    }
+
 }
